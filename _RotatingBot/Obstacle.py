@@ -10,6 +10,8 @@ class Obstacle:
 
         self.Theta_to_center = math.atan2(self.centerY, self.centerX)
         self.R_to_center = math.sqrt(self.centerX**2 + self.centerY**2)
+
+        self.plotLists()
     
     def computethetaTraj(self,psiworld):
         self.thetaTraj = psiworld + self.Theta_to_center
@@ -25,9 +27,9 @@ class Obstacle:
     def printCenter(self):
         print self.centerX, self.centerY
         
-    def plotLists(self):
-        
-        t = np.linspace(-math.pi,math.pi,100)
-        x = self.radius*np.cos(t) + self.centerX
-        y = self.radius*np.sin(t) + self.centerY
-        return x, y
+    def plotLists(self):   
+        t = np.linspace(-math.pi,math.pi,20)
+        x = self.radius*np.cos(t)# + self.centerX
+        y = self.radius*np.sin(t)# + self.centerY
+        self.plotX = x
+        self.plotY = y
