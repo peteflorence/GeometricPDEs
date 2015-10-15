@@ -8,7 +8,7 @@ class Obstacle:
         self.centerY = y
         self.radius = 1
 
-        self.Theta_to_center = math.atan2(self.centerX, self.centerY)
+        self.Theta_to_center = math.atan2(self.centerY, self.centerX)
         self.R_to_center = math.sqrt(self.centerX**2 + self.centerY**2)
     
     def computethetaTraj(self,psiworld):
