@@ -7,6 +7,7 @@ class Obstacle:
         self.centerX = x
         self.centerY = y
         self.radius = 1
+        self.center = np.array((x,y))
 
         self.Theta_to_center = math.atan2(self.centerY, self.centerX)
         self.R_to_center = math.sqrt(self.centerX**2 + self.centerY**2)

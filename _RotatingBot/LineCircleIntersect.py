@@ -19,16 +19,16 @@ def intersect(P1, P2, Q, r):
 
     disc = b**2 - 4.0 * a * c
     if disc < 0:
-        print "no intersection"
+        #print "no intersection"
         return False, None
 
-    print "could be intersection..."
+    #print "could be intersection..."
     sqrt_disc = math.sqrt(disc)
     t1 = (-b + sqrt_disc) / (2.0 * a)
     t2 = (-b - sqrt_disc) / (2.0 * a)
 
     if not (0 <= t1 <= 1 or 0 <= t2 <= 1):
-        print "would intersect if line was extended"
+        #print "would intersect if line was extended"
         return False, None
    
     #t = max(0, min(1, - b / (2.0 * a)))
@@ -39,6 +39,6 @@ def intersect(P1, P2, Q, r):
     else:
         t = t2
 
-    print "yes there is an intersection!"
+    #print "yes there is an intersection!"
     pt = P1 + t * V
     return True, pt
