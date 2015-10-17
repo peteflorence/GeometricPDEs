@@ -29,4 +29,4 @@ def computeLaserDepthsTraj(xworld,yworld,laseAngles,S_maxdist,obsField):
             depth = math.sqrt(x_laser_endpointTraj[i,lasenum]**2 + y_laser_endpointTraj[i,lasenum]**2)
             laserDepthsTraj[i,lasenum] = depth
 
-    return laserDepthsTraj, x_laser_endpointTraj, x_laser_endpointTraj
+    return laserDepthsTraj, x_laser_endpointTraj, y_laser_endpointTraj
