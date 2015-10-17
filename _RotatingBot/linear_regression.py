@@ -41,30 +41,36 @@ class LinearRegression:
         for i in range(0,self.numFeatures):
             self.phi[:,i] = np.power(self.x,i)
 
-    def setBases(self,N,cslist):
+    def setBases(self,N,M,cslist):
         self.bases = []
         b = math.pi
         a = -math.pi
         m = 2.0*math.pi / (b - a)
-        M = 20
+        M = 15
 
-        def f(i,x):
-            cs = cslist[i]; y = 0
+        def f(x,i):
+            cs = cslist[i]
+            y = 0
             for k in range(M+1):
                 y = y + cs[0][k] * np.cos(k * m * x)
                 y = y + cs[1][k] * np.sin(k * m * x)
             return y
-        self.bases = [functools.partial(f, i) for i in range(N)]
+        self.bases = [functools.partial(f, i=j) for j in range(N)]
 
         # self.bases = [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12]
 
     def RBF_Phi(self,N):
         self.phi = np.zeros((len(self.x),N))
-        #print self.phi
         for i in range(0,N):
-            print i
             self.phi[:,i] = self.bases[i](self.x)
         print self.phi
+
+    def evalRBFbasis(self,w,x):
+        ans = 0
+        for i in range(len(w)):
+            ans = ans + w[i]*self.bases[i](x)
+        return ans
+       
 
     # applies feature normalization to the matrix Phi
     def rescaleFeatures(self, method="interval"):
