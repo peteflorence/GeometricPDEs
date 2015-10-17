@@ -5,6 +5,7 @@ import pylab as pl
 import scipy.optimize as opt
 import scipy.io as sio
 import math
+import functools
 
 
 def getData(name):
@@ -45,87 +46,23 @@ class LinearRegression:
         b = math.pi
         a = -math.pi
         m = 2.0*math.pi / (b - a)
-        M = 6
+        M = 20
 
-        def f1(x):
-            cs = cslist[0]; y = 0
+        def f(i,x):
+            cs = cslist[i]; y = 0
             for k in range(M+1):
                 y = y + cs[0][k] * np.cos(k * m * x)
                 y = y + cs[1][k] * np.sin(k * m * x)
             return y
-        def f2(x):
-            cs = cslist[1]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f3(x):
-            cs = cslist[2]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f4(x):
-            cs = cslist[3]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f5(x):
-            cs = cslist[4]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f6(x):
-            cs = cslist[5]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f7(x):
-            cs = cslist[6]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f8(x):
-            cs = cslist[7]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f9(x):
-            cs = cslist[8]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f10(x):
-            cs = cslist[9]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f11(x):
-            cs = cslist[10]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
-        def f12(x):
-            cs = cslist[11]; y = 0
-            for k in range(M+1):
-                y = y + cs[0][k] * np.cos(k * m * x)
-                y = y + cs[1][k] * np.sin(k * m * x)
-            return y
+        self.bases = [functools.partial(f, i) for i in range(N)]
 
-        self.bases = [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12]
+        # self.bases = [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12]
 
     def RBF_Phi(self,N):
         self.phi = np.zeros((len(self.x),N))
-        print self.phi
+        #print self.phi
         for i in range(0,N):
+            print i
             self.phi[:,i] = self.bases[i](self.x)
         print self.phi
 

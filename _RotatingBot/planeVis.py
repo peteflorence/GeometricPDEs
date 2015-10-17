@@ -10,19 +10,19 @@ def plotPlane(theta_deg):
         # Plot circle obstacle 2
         an = np.linspace(0,2*math.pi,100)
         r_circ = math.sqrt(5**2 + 12**2)
-        print r_circ
+        #print r_circ
         theta_0_circ = math.atan(-5.0/10.0)
         theta_rel_circ = theta + theta_0_circ
-        print theta_rel_circ
+        #print theta_rel_circ
         ax.plot(1*np.cos(an)+r_circ*math.sin(math.pi + theta_rel_circ), 1*np.sin(an) - r_circ*math.cos(math.pi + theta_rel_circ))
 
         # Plot circle obstacle 2
         an = np.linspace(0,2*math.pi,100)
         r_circ = math.sqrt(3**2 + 10**2)
-        print r_circ
+        #print r_circ
         theta_0_circ = math.atan(3.0/10.0)
         theta_rel_circ = theta + theta_0_circ
-        print theta_rel_circ
+        #print theta_rel_circ
         ax.plot(1*np.cos(an)+r_circ*math.sin(math.pi + theta_rel_circ), 1*np.sin(an) - r_circ*math.cos(math.pi + theta_rel_circ))
 
     fig, ax = plt.subplots()
