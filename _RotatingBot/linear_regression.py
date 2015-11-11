@@ -41,7 +41,7 @@ class LinearRegression:
         for i in range(0,self.numFeatures):
             self.phi[:,i] = np.power(self.x,i)
 
-    def setBases(self,N,M,cslist):
+    def setBasesFofG(self,N,M,cslist):
         self.bases = []
         b = math.pi
         a = -math.pi
@@ -59,17 +59,46 @@ class LinearRegression:
 
         # self.bases = [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12]
 
+    def setBasesGaussian(self,N):
+        self.bases = []
+        b = math.pi
+        a = -math.pi
+        m = 2.0*math.pi / (b - a)
+        
+        mu = np.linspace(-math.pi,math.pi,N)
+
+        def f(x,i):
+            return 2.71 ** (-(x-mu[i])**2)
+        
+        self.bases = [functools.partial(f, i=j) for j in range(N)]
+
+    def setBasesVonMises(self,N):
+        self.bases = []
+        b = math.pi
+        a = -math.pi
+        m = 2.0*math.pi / (b - a)
+        
+        mu = np.linspace(0,math.pi,N)
+        kappa = 1
+
+        def f(x,i):
+            return 2.71 ** (kappa * np.cos(x - mu[i]))
+        
+        self.bases = [functools.partial(f, i=j) for j in range(N)]
+
+
     def RBF_Phi(self,N):
+        print N
         self.phi = np.zeros((len(self.x),N))
         for i in range(0,N):
             self.phi[:,i] = self.bases[i](self.x)
-        print self.phi
 
     def evalRBFbasis(self,w,x):
         ans = 0
         for i in range(len(w)):
             ans = ans + w[i]*self.bases[i](x)
         return ans
+
        
 
     # applies feature normalization to the matrix Phi
